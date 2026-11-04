@@ -967,7 +967,23 @@ var SELF = (location.protocol === 'file:' || !location.origin || location.origin
 
 /* ═══ backend: live (Apps Script) or preview (in this file) ═══ */
 var _cb = 0;
+/* Cookie-free requests first: a script tag carries the browser's Google cookies, and with two Google accounts signed in
+   Apps Script answers with an account chooser instead of data. fetch with credentials 'omit' always gets the public answer. */
 function gasLive(params){
+  if (!GAS_ENDPOINT || GAS_ENDPOINT.indexOf('{{') === 0) return Promise.resolve({ok:false, error:'not_configured', message:'The hub is not connected to its backend yet.'});
+  if (!window.fetch) return gasJsonp(params);
+  var qs = Object.keys(params).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k] == null ? '' : params[k]); }).join('&');
+  var url = GAS_ENDPOINT + (GAS_ENDPOINT.indexOf('?') > -1 ? '&' : '?') + qs, ctl = window.AbortController ? new AbortController() : null;
+  var t = setTimeout(function(){ if (ctl) ctl.abort(); }, 30000);
+  var req = url.length > 6000 ? fetch(GAS_ENDPOINT, {method:'POST', body:JSON.stringify(params), credentials:'omit', redirect:'follow', signal:ctl && ctl.signal})
+                              : fetch(url, {credentials:'omit', redirect:'follow', signal:ctl && ctl.signal});
+  return req.then(function(r){ clearTimeout(t); return r.json(); }).catch(function(e){
+    clearTimeout(t);
+    if (e && e.name === 'AbortError') return {ok:false, error:'timeout', message:'The server took too long to respond. Please try again.'};
+    return gasJsonp(params);
+  });
+}
+function gasJsonp(params){
   return new Promise(function(resolve){
     if (!GAS_ENDPOINT || GAS_ENDPOINT.indexOf('{{') === 0) { resolve({ok:false, error:'not_configured', message:'The hub is not connected to its backend yet.'}); return; }
     var name = '__cahcb' + (++_cb) + '_' + Date.now(), s = document.createElement('script'), done = false;
@@ -2154,7 +2170,11 @@ var TRK = (function(){
   /* POST beacon (no URL-length limit, survives page close); JSONP only as the fallback */
   function send(b){
     if (PREVIEW) return gasPreview(payload(b));
-    try { if (navigator.sendBeacon && GAS_ENDPOINT && GAS_ENDPOINT.indexOf('{{') !== 0 && navigator.sendBeacon(GAS_ENDPOINT, new Blob([JSON.stringify(payload(b))], {type:'text/plain'}))) return; } catch(e){}
+    if (!GAS_ENDPOINT || GAS_ENDPOINT.indexOf('{{') === 0) return;
+    var body = JSON.stringify(payload(b));
+    /* cookie-free POST that survives the page closing (keepalive); the beacon and JSONP are fallbacks */
+    try { fetch(GAS_ENDPOINT, {method:'POST', body:body, credentials:'omit', keepalive:body.length < 60000, mode:'no-cors'}).catch(function(){ try { navigator.sendBeacon(GAS_ENDPOINT, new Blob([body], {type:'text/plain'})); } catch(_){} }); return; } catch(e){}
+    try { if (navigator.sendBeacon && navigator.sendBeacon(GAS_ENDPOINT, new Blob([body], {type:'text/plain'}))) return; } catch(e){}
     gas(payload(b.slice(0, 8))).catch(function(){});
   }
   function flush(){ clearTimeout(timer); timer = null; while (Q.length) send(Q.splice(0, 30)); }
