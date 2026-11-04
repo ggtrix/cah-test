@@ -2250,7 +2250,7 @@ window.EX = (function(){
   function clip(t, n){ return String(t || '').replace(/\s+/g, ' ').trim().slice(0, n || 120); }
   function push(ev, what, detail, where, dom){
     Q.push({t:Date.now(), ev:ev, what:clip(what, 160), detail:clip(detail, 300), where:clip(where, 120), dom:clip(dom, 80)});
-    if (Q.length >= 12) flush(); else if (!timer) timer = setTimeout(flush, 5000);
+    if (Q.length >= 25) flush(); else if (!timer) timer = setTimeout(flush, 15000);   /* few, larger batches: light on the backend under heavy traffic */
   }
   function body(b){ return {action:'track', source:'site', vid:VID, ref:REF, dev:DEV, events:JSON.stringify(b)}; }
   function send(b){
@@ -2284,7 +2284,8 @@ window.EX = (function(){
     var what = label(el), href = el.tagName === 'A' ? (el.getAttribute('href') || '') : '';
     if (!what && href) what = href;
     if (!what) return;
-    push(/reports\/|report/i.test(href) ? 'open_report' : 'click', what, href && href.charAt(0) !== '#' ? href.split('?')[0].split('#')[0] : (href || ''), where(el), hospOf(el));
+    var ext = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !/\/hub\/?$|reports hub/i.test(href + ' ' + what);
+    push(ext ? 'outbound' : /reports\/|report|\.pdf/i.test(href) ? 'open_report' : 'click', what, href && href.charAt(0) !== '#' ? href.split('?')[0].split('#')[0] : (href || ''), where(el), hospOf(el));
   }, true);
 
   /* lookups: the result card that appears under either search box */
@@ -2316,6 +2317,9 @@ window.EX = (function(){
     document.querySelectorAll('section[id]').forEach(function(sec){ io.observe(sec); });
   }
   push('page_view', document.title, location.pathname + (location.hash || ''), 'page', '');
+  /* wake the backend as soon as someone starts filling in a form, so the send is quick */
+  var woke = false;
+  document.addEventListener('focusin', function(e){ if (woke || !e.target.closest || !e.target.closest('form')) return; woke = true; try { if (window.cahGas && EP.indexOf('{{') !== 0) window.cahGas({action:'ping'}); } catch(_){} });
   window.cahTrack = push;
 })();
 </script>

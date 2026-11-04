@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex,nofollow">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://script.googleusercontent.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data:; frame-src 'self' https://www.google.com; connect-src 'self' https://dns.google https://cloudflare-dns.com https://www.google.com https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://script.googleusercontent.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob:; frame-src 'self' blob: https://www.google.com; connect-src 'self' https://dns.google https://cloudflare-dns.com https://www.google.com https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
 <title>Cyber Risk Reports Hub · SureShield × BorderHawk</title>
 <script>try{if(sessionStorage.getItem('cahTheme')==='dark')document.documentElement.setAttribute('data-theme','dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -539,6 +539,87 @@ main.hubmain{padding-bottom:28px}
 .ecout .lnk{font-weight:600}
 .ecload{display:flex;align-items:center;gap:8px}.ecload i{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite}
 footer .fdisc{flex-basis:100%;font-size:11.5px;color:var(--muted)}
+
+/*ADM4*/
+/* full-screen admin console */
+#mAdmin{padding:0;place-items:stretch;background:var(--ground);backdrop-filter:none;-webkit-backdrop-filter:none}
+#mAdmin .mcard.xwide{width:100%;max-width:none;height:100vh;height:100dvh;max-height:none;border:0;border-radius:0;padding:0;display:flex;flex-direction:column;overflow:hidden;animation:none;box-shadow:none;background:var(--ground)}
+#mAdmin .mhead{flex:none;align-items:center;gap:14px;margin:0;padding:14px clamp(16px,3vw,40px);background:var(--surface);border-bottom:1px solid var(--line)}
+#mAdmin .mhead h3{font-size:1.25rem}
+#mAdmin .mhead [data-close]{margin-left:12px}
+.admark{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);font:800 17px var(--display)}
+.admwho{margin-left:auto;font:500 12px var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}
+#mAdmin .atabs{flex:none;margin:0;padding:0 clamp(16px,3vw,40px);background:var(--surface);border-bottom:1px solid var(--line);gap:2px;flex-wrap:nowrap;overflow-x:auto}
+#mAdmin .atabs button{padding:13px 14px;white-space:nowrap}
+#admBody{flex:1;overflow:auto;padding:22px clamp(16px,3vw,40px) 70px;-webkit-overflow-scrolling:touch}
+#admBody>*{max-width:1440px;margin-left:auto;margin-right:auto}
+@media (max-width:640px){.admwho{display:none}#mAdmin .mhead [data-close]{margin-left:auto}}
+/* hospital requests */
+.hrgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:16px;margin-top:6px}
+.hr{position:relative;display:flex;flex-direction:column;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;box-shadow:var(--shadow);overflow:hidden}
+.hr::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--kc,var(--accent))}
+.hr.k-service{--kc:var(--accent)}.hr.k-verify{--kc:var(--high)}.hr.k-review{--kc:#7A5AA6}
+.hr.hl{outline:2px solid var(--accent);outline-offset:2px}
+.hr-top{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
+.hr-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--kc);background:color-mix(in srgb,var(--kc) 13%,transparent)}
+.hr-ic svg{width:20px;height:20px}
+.hr-top b{font:650 1.02rem var(--display);display:block;line-height:1.25}
+.hr-top small{font:500 11px var(--mono);letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+.hr-hosp{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:13.5px;color:var(--ink-2)}
+.hr-hosp b{color:var(--ink);font-weight:650}
+.hr-det{font-size:13px;color:var(--ink-2);background:var(--surface-2);border-radius:12px;padding:10px 12px;display:grid;gap:4px}
+.hr-det span{font:500 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:3px;padding:3px;border-radius:999px;background:var(--surface-2)}
+.seg button{border:0;background:transparent;border-radius:999px;padding:6px 11px;font:600 12px var(--body);color:var(--ink-2);cursor:pointer}
+.seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg button.on[data-v="Completed"]{color:var(--low)}.seg button.on[data-v="Cancelled"]{color:var(--crit)}.seg button.on[data-v="In Progress"]{color:var(--accent-ink)}
+.hr-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:2px}
+.hr .who2{display:flex;gap:10px;align-items:center;margin:0}.hr .who2 .av2{width:34px;height:34px;font-size:12px;flex:none}.hr .who2 b{font-size:13.5px;font-weight:600;word-break:break-all}.hr .who2 small{display:block;color:var(--muted);font-size:12px}
+.hr-acts .sp{flex:1}
+.dfiles{display:grid;gap:6px}
+.dfile{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:13px}
+.dfile .ty{font:700 10px var(--mono);letter-spacing:.06em;padding:5px 6px;border-radius:7px;background:var(--accent-soft);color:var(--accent-ink);text-transform:uppercase}
+.dfile small{display:block;color:var(--muted);font-size:11.5px}
+.dform{display:grid;gap:10px;border:1px dashed var(--line-2);border-radius:14px;padding:14px;background:color-mix(in srgb,var(--accent-soft) 35%,transparent)}
+.dform input[type=text],.dform textarea{width:100%;border:1px solid var(--line-2);border-radius:10px;padding:9px 11px;font:inherit;font-size:13.5px;background:var(--surface);color:var(--ink)}
+.drop{display:grid;place-items:center;text-align:center;gap:4px;border:1.5px dashed var(--line-2);border-radius:12px;padding:18px;background:var(--surface);cursor:pointer;font-size:13px;color:var(--ink-2)}
+.drop.on{border-color:var(--accent);background:var(--accent-soft)}
+.drop b{color:var(--ink)}
+.dform .chk2{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-2)}
+.prog{height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden}.prog i{display:block;height:100%;width:35%;background:var(--accent);animation:prg 1.1s ease-in-out infinite}
+@keyframes prg{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+/* 05 · delivered reports */
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;margin-bottom:18px}
+.dtile{display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:transform .3s var(--ease),box-shadow .3s}
+.dtile:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.dtile .art{height:120px;display:grid;place-items:center;color:var(--accent);background:linear-gradient(140deg,var(--accent-soft),color-mix(in srgb,var(--accent-soft) 30%,var(--surface)))}
+.dtile .cap{display:flex;flex-direction:column;gap:6px;padding:16px 18px 18px;flex:1}
+.dtile .cap b{font:650 1.05rem var(--display);line-height:1.3}
+.dtile .cap p{font-size:13px;color:var(--ink-2)}
+.dtile .row{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.rqh{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:2px 0 10px}
+.st.Cancelled{background:color-mix(in srgb,var(--crit) 12%,transparent);color:var(--crit)}
+/* 06 · fixes grid */
+.fxbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.fxbar button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:7px 13px;font:600 12.5px var(--body);cursor:pointer}
+.fxbar button i{width:9px;height:9px;border-radius:50%}
+.fxbar button b{font:600 11px var(--mono);color:var(--muted)}
+.fxbar button.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}.fxbar button.on b{color:inherit;opacity:.75}
+.fxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:14px}
+.fx{position:relative;display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px;box-shadow:var(--shadow);border-top:4px solid var(--pc);cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s}
+.fx:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.fx-h{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.fx-ph{font:600 10px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--pc)}
+.fx-n{font:500 11px var(--mono);color:var(--muted)}
+.fx b{font:650 14.5px var(--display);line-height:1.3}
+.fx p{font-size:13px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.fx.full p{-webkit-line-clamp:unset;display:block}
+.fx-m{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.fx-m span{font:600 10px var(--mono);letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:3px 8px;background:var(--surface-2);color:var(--ink-2)}
+.fx-m .e-low{color:var(--low);background:color-mix(in srgb,var(--low) 13%,transparent)}
+.fx-m .e-high{color:var(--crit);background:color-mix(in srgb,var(--crit) 11%,transparent)}
+.fx-m .i-high{color:var(--accent-ink);background:var(--accent-soft)}
+.fx .qw{margin-left:0}
 </style>
 </head>
 <body>
@@ -802,10 +883,11 @@ footer .fdisc{flex-basis:100%;font-size:11.5px;color:var(--muted)}
 </div></div>
 
 <div class="mdl" id="mAdmin" hidden role="dialog" aria-modal="true" aria-labelledby="mAdmT"><div class="mcard xwide">
-  <div class="mhead"><div><p class="lbl" id="admKick">Admin console</p><h3 id="mAdmT">Requests &amp; activity</h3></div><button class="mx" type="button" data-close aria-label="Close">×</button></div>
+  <div class="mhead"><span class="admark">S</span><div><p class="lbl" id="admKick">Admin console</p><h3 id="mAdmT">Requests &amp; activity</h3></div><span class="admwho" id="admWho"></span><button class="btn ghost sm" type="button" data-close>← Back to hub</button></div>
   <div class="atabs" role="tablist">
-    <button type="button" role="tab" data-atab="req" class="on">Hub requests<span class="n" id="admTabN" hidden></span></button>
-    <button type="button" role="tab" data-atab="hub">Reports hub activity</button>
+    <button type="button" role="tab" data-atab="req" class="on">Access approvals<span class="n" id="admTabN" hidden></span></button>
+    <button type="button" role="tab" data-atab="hreq">Hospital requests<span class="n" id="admHreqN" hidden></span></button>
+    <button type="button" role="tab" data-atab="hub">Hub activity</button>
     <button type="button" role="tab" data-atab="site">Website activity</button>
   </div>
   <div id="admBody"><div class="spin"></div></div>
@@ -833,7 +915,7 @@ footer .fdisc{flex-basis:100%;font-size:11.5px;color:var(--muted)}
   <div style="margin-top:18px"><button class="btn" type="button" id="btnTerms">I understand, open my hub →</button></div>
 </div></div>
 
-<div class="toolbar" id="toolbar" hidden><b style="font-family:var(--display);font-size:1.1rem" id="toolTitle">Interactive report</b><span class="fine" id="toolName"></span><button class="btn ghost sm" type="button" id="toolClose" style="margin-left:auto">← Back to hub</button></div>
+<div class="toolbar" id="toolbar" hidden><b style="font-family:var(--display);font-size:1.1rem" id="toolTitle">Interactive report</b><span class="fine" id="toolName"></span><a class="btn ghost sm" id="toolDl" hidden style="margin-left:auto">Download</a><button class="btn ghost sm" type="button" id="toolClose" style="margin-left:auto">← Back to hub</button></div>
 <iframe id="repFrame" title="Sector report" hidden></iframe>
 <iframe id="tool" class="offscreen" title="Interactive report" aria-hidden="true" tabindex="-1" data-hub="1"></iframe>
 
@@ -931,15 +1013,43 @@ function gasPreview(p){
       rows.forEach(function(r){ if (r.what && /^(click|open_report|form_submit|lookup|request_sent)$/.test(r.ev)) top[r.what] = (top[r.what] || 0) + 1; ppl[r.who] = 1; });
       return R({ok:true, preview:true, source:p.source, rows:rows, total:rows.length, people:Object.keys(ppl).length, days:30,
         top:Object.keys(top).map(function(k){ return {what:k, n:top[k]}; }).sort(function(a, b){ return b.n - a.n; }).slice(0, 12)});
-    case 'service_request': st['btn_' + p.request_type] = 'requested'; st['status_' + p.request_type] = 'Pending'; return R({ok:true});
-    case 'verify_fixes': st.btn_verify_fixes = 'requested'; return R({ok:true});
-    case 'book_review': case 'share_hub': return R({ok:true, preview:true});
+    case 'service_request': st['btn_' + p.request_type] = 'requested'; st['status_' + p.request_type] = 'Pending'; pvHreq().unshift(pvNewReq('service', d, p.request_type, p.notes || '')); return R({ok:true});
+    case 'verify_fixes': st.btn_verify_fixes = 'requested'; st.status_verify_fixes = 'Pending'; pvHreq().unshift(pvNewReq('verify', d, 'Updated report (verify fixes)', p.notes || '')); return R({ok:true});
+    case 'book_review': st.btn_review = 'requested'; st.status_review = 'Pending'; var nr = pvNewReq('review', d, 'Review session', ''); nr.date = p.preferred_date; nr.time = p.preferred_time; nr.topic = p.topic; pvHreq().unshift(nr); return R({ok:true, preview:true});
+    case 'share_hub': return R({ok:true, preview:true});
+    case 'admin_hospital_requests': return R({ok:true, preview:true, requests:pvHreq().map(function(x){ x.delivered = PV_DLV.filter(function(f){ return f.req_id === x.id && !f.gone; }); return x; })});
+    case 'admin_request_status': var hx = pvHreq().filter(function(x){ return x.id === p.id; })[0]; if (!hx) return R({ok:false, message:'Not found.'}); hx.status = p.status; var hs = PV_STATE[hx.domain] = PV_STATE[hx.domain] || {}; hs['btn_' + hx.key] = 'requested'; hs['status_' + hx.key] = p.status;
+      PV_TRACK.unshift({ts:new Date().toISOString(), who:S.email, role:'admin', dom:hx.domain, ev:'request_status', what:hx.title + ': ' + p.status, detail:'Requested by ' + hx.email, where:'admin console'}); return R({ok:true});
+    case 'admin_deliver': var dx = pvHreq().filter(function(x){ return x.id === p.request_id; })[0]; if (!dx) return R({ok:false, message:'Not found.'});
+      PV_DLV.unshift({id:'pd' + PV_DLV.length, req_id:dx.id, domain:dx.domain, request:dx.title, title:p.title, note:p.note, name:p.file_name, mime:p.file_type, kb:Math.round(p.file_b64.length * .75 / 1024), ts:new Date().toISOString(), by:S.email, b64:p.file_b64});
+      if (p.mark_done !== 'no') { dx.status = 'Completed'; var ds = PV_STATE[dx.domain] = PV_STATE[dx.domain] || {}; ds['btn_' + dx.key] = 'requested'; ds['status_' + dx.key] = 'Completed'; }
+      PV_TRACK.unshift({ts:new Date().toISOString(), who:S.email, role:'admin', dom:dx.domain, ev:'report_delivered', what:p.title, detail:p.file_name, where:'admin console'});
+      return R({ok:true, id:PV_DLV[0].id, emailed: p.notify === 'yes' ? [dx.email] : []});
+    case 'admin_deliver_remove': PV_DLV.forEach(function(f){ if (f.id === p.id) f.gone = true; }); return R({ok:true});
+    case 'get_delivered': return R({ok:true, reports:PV_DLV.filter(function(f){ return f.domain === d && !f.gone; })});
+    case 'get_delivered_file': var gf = PV_DLV.filter(function(f){ return f.id === p.id && f.domain === d && !f.gone; })[0];
+      if (gf) PV_TRACK.unshift({ts:new Date().toISOString(), who:S.email, role:S.isAdmin ? 'admin' : 'member', dom:d, ev:'open_report', what:'Delivered report: ' + gf.title, detail:gf.name, where:'requested reports'});
+      return R(gf ? {ok:true, name:gf.name, mime:gf.mime, title:gf.title, b64:gf.b64} : {ok:false, message:'That report is no longer available.'});
+    case 'ping': return R({ok:true});
     case 'get_access_list': return R({ok:true, preview:true, approved_requesters:[{email:'it.director@' + d, name:'Approved requester (example)', ts:'2026-10-02'}], shared_with:[{email:'cfo@' + d, name:'Colleague (example)', role:'CFO', shared_by:'it.director@' + d, ts:'2026-10-09'}], verified_users:[]});
     case 'get_access_log': return R({ok:true, rows:[{ts:'2026-10-20T15:12:00Z', email:'it.director@' + d, notes:'hub opened'}, {ts:'2026-10-19T09:41:00Z', email:'cfo@' + d, notes:'code sign-in'}, {ts:'2026-10-18T13:05:00Z', email:'it.director@' + d, notes:'code sign-in'}]});
     default: return R({ok:true});
   }
 }
-var PV_TRACK = [], PV_REQ = null, PV_SITE = null;
+var PV_TRACK = [], PV_REQ = null, PV_SITE = null, PV_HR = null, PV_DLV = [];
+function pvNewReq(kind, d, title, details){ var h = ((window.PREVIEW_DATA && PREVIEW_DATA.index) || []).filter(function(x){ return x.d === d; })[0] || {};
+  return {kind:kind, id:'ph' + Math.random().toString(36).slice(2, 9), ts:new Date().toISOString(), domain:d, email:S.email || 'you@' + d, title:title, key:kind === 'service' ? title : kind === 'verify' ? 'verify_fixes' : 'review',
+    status:'Pending', details:details, name:h.name || d, state:h.state || '', band:h.band || '', delivered:[]}; }
+function pvHreq(){
+  if (PV_HR) return PV_HR;
+  var hs = pvPick(5), items = [['service','Attack Surface Scan','Our new patient portal went live last month, please include it.'],['verify','Updated report (verify fixes)','We closed the exposed RDP host and set DMARC to quarantine.'],
+    ['review','Review session',''],['service','GRC Platform',''],['service','BEC Assessment','Two invoice-fraud attempts this quarter.'],['service','CVM Demo','']];
+  PV_HR = items.map(function(it, i){ var h = hs[i % hs.length] || {}, x = pvNewReq(it[0], h.d, it[1], it[2]);
+    x.ts = new Date(Date.now() - (i * 31 + 3) * 3600000).toISOString(); x.email = ['dana.whitfield','priya.raman','marcus.oyelaran','sam.kowalski','it.director','cfo'][i] + '@' + h.d;
+    x.status = ['Pending','In Progress','Pending','Completed','Pending','Cancelled'][i]; if (it[0] === 'review') { x.date = '2026-11-18'; x.time = '10:30'; x.topic = 'Walk our board through the immediate fixes'; } if (it[0] === 'verify') x.cves = 6;
+    return x; });
+  return PV_HR;
+}
 function pvPick(n){ var idx = (window.PREVIEW_DATA && PREVIEW_DATA.index) || []; return idx.filter(function(_, i){ return i % 137 === 11; }).slice(0, n); }
 function pvRequests(){
   if (PV_REQ) return PV_REQ;
@@ -1222,7 +1332,7 @@ function renderShell(){
   $('signals').innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>'; $('plan').innerHTML = '<div class="skel"></div>';
   document.title = co + ' · Cyber Risk Reports Hub';
   setTimeout(function(){ if (HF) HF.resize(); }, 30);
-  renderActions(); renderServices(); renderRequested(); setVerify();
+  S.delivered = []; renderActions(); renderServices(); renderRequested(); setVerify(); loadDelivered();
 }
 function animateNumbers(){
   var rec = S.data.rec, f = rec.max_score / 100;
@@ -1312,10 +1422,7 @@ function renderBlob(b){
   $('eff').innerHTML = '<div><span>Critical / immediate</span><b>' + imm.length + '</b></div><div><span>Moderate effort</span><b>' + (eff.medium || 0) + '</b></div><div><span>Low effort</span><b>' + (eff.low || 0) + '</b></div>';
   $('actMeta').textContent = imm.length ? '⚠ ' + imm.length + ' immediate · ' + all.length + ' total' : 'Nothing in the immediate class';
   $('fixMeta').textContent = quick + ' quick win' + (quick === 1 ? '' : 's') + ' · ' + all.length + ' total';
-  $('plan').innerHTML = plan.map(function(ph, k){
-    return '<details class="phase"' + (k === 0 ? ' open' : '') + '><summary><i style="background:' + cols[k] + '"></i><span>' + esc(ph.phase) + '</span><small>' + ph.items.length + ' fix' + (ph.items.length === 1 ? '' : 'es') + '</small><span class="chev">▾</span></summary><ol>' +
-      ph.items.map(function(it){ return '<li><div><b>' + esc(it.t) + (it.effort === 'low' ? '<span class="qw">Quick win</span>' : '') + '</b><p>' + esc(it.d) + '</p></div><span>' + esc(it.effort || '') + ' effort<br>' + esc(it.impact || '') + ' impact</span></li>'; }).join('') + '</ol></details>';
-  }).join('');
+  FX.plan = plan; FX.cols = cols; FX.f = 'all'; renderFixes();
   // affected hosts
   var SIGL = {}; (b.signals || []).forEach(function(x){ SIGL[x.key] = x.label; });
   var hosts = (b.surface.assets || []).filter(function(h){ return h.score >= 45; }).sort(function(a, c){ return c.score - a.score; });
@@ -1401,6 +1508,7 @@ $('ecRun').addEventListener('click', function(){
   out.innerHTML = '<span class="ecload"><i></i>Reading the public DMARC and SPF records for ' + esc(d) + '…</span>';
   Promise.all([ecDmarcB(d), ecSpfB(d)]).then(function(res){
     var j = EC.judge(d, res[0], res[1]); EC_LAST = {domain: d, j: j};
+    try { TRK.push('spoof_check', 'Email spoofing check · ' + j.verdict, 'DMARC: ' + j.D.label + ' · SPF: ' + j.S.label, 'my hospital’s reports'); } catch(_){}
     btn.disabled = false; btn.textContent = 'Run again';
     out.innerHTML = '<span class="ecv" style="background:' + EC.color(j.verdict) + '">' + esc(j.verdict) + '</span>' +
       '<dl><dt>DMARC</dt><dd>' + esc(j.D.label) + '</dd><dt>SPF</dt><dd>' + esc(j.S.label) + '</dd></dl>' +
@@ -1483,7 +1591,7 @@ var SVC = [
 ];
 function renderServices(){
   $('services').innerHTML = SVC.map(function(s){
-    return '<div class="svc' + (s.co === 'BORDERHAWK' ? ' bh' : '') + '"><span class="lbl">' + esc(s.co) + '</span><b>' + esc(s.name) + '</b><p>' + esc(s.desc) + '</p><a class="btn ghost sm" href="' + esc(s.url) + '" target="_blank" rel="noopener">Learn more →</a></div>';
+    return '<div class="svc' + (s.co === 'BORDERHAWK' ? ' bh' : '') + '"><span class="lbl">' + esc(s.co) + '</span><b>' + esc(s.name) + '</b><p>' + esc(s.desc) + '</p><a class="btn ghost sm" href="' + esc(s.url) + '" target="_blank" rel="noopener" data-track="Suggested service: ' + esc(s.name) + ' (' + esc(s.co) + ')">Learn more →</a></div>';
   }).join('');
 }
 $('btnAllSvc').addEventListener('click', function(){ var r = $('services'); r.classList.toggle('all'); this.textContent = r.classList.contains('all') ? 'Show fewer ▲' : 'Show all ' + SVC.length + ' services ▼'; });
@@ -1496,7 +1604,7 @@ $('btnVerify').addEventListener('click', function(){
   var b = this; b.disabled = true;
   authed({action:'verify_fixes', hospital_domain: S.domain, cve_count: S.data.rec.total_cve}).then(function(r){
     if (!r.ok) { b.disabled = false; return toast(r.message || 'Could not send the request.'); }
-    S.state.btn_verify_fixes = 'requested'; setVerify(); renderRequested();
+    S.state.btn_verify_fixes = 'requested'; S.state.status_verify_fixes = S.state.status_verify_fixes || 'Pending'; setVerify(); renderRequested();
   }).catch(function(){ b.disabled = false; });
 });
 
@@ -1554,6 +1662,7 @@ $('fReview').addEventListener('submit', function(e){
     busy(form, false);
     if (!r.ok) return msg('mReviewMsg', 'err', r.message || 'Could not send the request.');
     msg('mReviewMsg', 'info', PREVIEW ? 'Preview: no request was sent.' : 'Request sent. We’ll email you within 2 to 3 business days to confirm a time.'); form.reset();
+    S.state.btn_review = 'requested'; S.state.status_review = S.state.status_review || 'Pending'; renderRequested();
   }).catch(function(){ busy(form, false); });
 });
 
@@ -2056,7 +2165,8 @@ var TRK = (function(){
     var what = label(el); if (!what && el.tagName === 'A') what = el.getAttribute('href') || '';
     if (!what) return;
     var href = el.tagName === 'A' ? (el.getAttribute('href') || '') : '';
-    push('click', what, href && href.charAt(0) !== '#' ? href.split('?')[0].slice(0, 200) : '', frame || where(el));
+    var ext = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0;
+    push(ext ? 'outbound' : 'click', what, href && href.charAt(0) !== '#' ? href.split('?')[0].slice(0, 200) : '', frame || where(el));
   }
   document.addEventListener('click', function(e){ onClick(e); }, true);
   function watchFrame(f, name){
@@ -2080,7 +2190,7 @@ var TRK = (function(){
   var oOpenDoc = openDoc; openDoc = function(html, title, name){ TRK.push('open_report', title, name, 'hospital breakdowns'); return oOpenDoc(html, title, name); };
   document.querySelectorAll('#tAgg a[data-rep]').forEach(function(a){ a.addEventListener('click', function(){ TRK.push('open_report', (a.querySelector('b') || a).textContent.trim(), 'Sector report', 'sector reports'); }); });
   $('tile1').addEventListener('click', function(){ TRK.push('open_report', 'Interactive report', '', 'my hospital’s reports'); });
-  $('tile2').addEventListener('click', function(){ TRK.push('open_report', 'Printable full report', '', 'my hospital’s reports'); });
+  $('tile2').addEventListener('click', function(){ TRK.push('open_report', 'PDF report (printable full findings)', '', 'my hospital’s reports'); });
   document.addEventListener('submit', function(e){ var f = e.target; if (f.closest('#gate')) return; TRK.push('form_submit', (f.closest('.mdl') && (f.closest('.mdl').querySelector('h3') || {}).textContent) || f.id, '', 'form'); }, true);
 })();
 
@@ -2155,7 +2265,7 @@ function renderReqs(){
     '<div class="adm-bar"><input type="search" id="admQ" placeholder="Search hospital, domain, state or requester" value="' + esc(ADM.q) + '">' +
     '<select id="admS"><option value="new">Newest first</option><option value="old">Oldest first</option></select>' +
     '<button class="btn ghost sm" type="button" id="admRf">Refresh</button></div>' +
-    '<p class="fine" style="margin:-4px 0 12px">' + roleLine + ' The access email goes out by itself once a request has <b>both</b> the QA check and the final approval.</p>';
+    '<p class="fine" style="margin:-4px 0 12px">' + roleLine + ' The access email goes out by itself once a request has <b>both</b> the QA check and the final approval. When QA approves, ' + esc((me.approvers || ['Jay','Tom']).map(function(n){ return n.split(' ')[0]; }).join(' and ')) + ' get an email asking for the final approval, with the QA note; a failed QA check emails the team.</p>';
   h += list.length ? list.map(reqCard).join('') : '<div class="pan" style="text-align:center;padding:30px"><b>' + (ADM.filter === 'open' ? 'Nothing is waiting for you.' : 'No requests here.') + '</b><p class="fine">New requests appear at the top as they arrive.</p></div>';
   $('admBody').innerHTML = h; $('admS').value = ADM.sort || 'new';
   $('admQ').addEventListener('input', function(){ ADM.q = this.value; var p = this.selectionStart; renderReqs(); $('admQ').focus(); try { $('admQ').setSelectionRange(p, p); } catch(_){} });
@@ -2205,12 +2315,12 @@ $('admBody').addEventListener('click', function(e){
     if (!r.ok) { toast(r.message || 'Could not save the decision.'); return loadReqs(); }
     var who = x.email || 'the requester';
     toast(r.result === 'sent' ? 'Both approvals in. Access email sent to ' + who + '.' : r.result === 'revoked' ? (v === 'Revoked' ? 'Access revoked.' : 'Request rejected.') :
-      r.result === 'waiting' ? 'Saved. ' + (field === 'qa' ? 'Waiting for the final approval.' : 'Waiting for the QA check.') : r.result === 'already_sent' ? 'Saved. The access email was already sent.' : 'Saved.');
+      r.result === 'waiting' ? 'Saved. ' + (field === 'qa' ? (v === 'QA Failed' ? 'The team has been emailed with your note.' : 'Waiting for the final approval.' + (r.notified ? ' The approvers have been emailed.' : '')) : 'Waiting for the QA check.' + (r.notified ? ' The QA team has been emailed.' : '')) : r.result === 'already_sent' ? 'Saved. The access email was already sent.' : 'Saved.');
     loadReqs();
   }).catch(function(){});
 });
 function confirmInline(b, q){ if (b.dataset.sure) return true; b.dataset.sure = '1'; b.dataset.t0 = b.textContent; b.textContent = q + ' Click again'; setTimeout(function(){ if (b.isConnected) { b.textContent = b.dataset.t0; delete b.dataset.sure; } }, 4000); return false; }
-var EVN = {click:'Click', open_report:'Opened a report', form_submit:'Form sent', lookup:'Lookup', sign_in:'Signed in', open_hub:'Opened hub', request_received:'New request', qa_decision:'QA decision', approval_decision:'Approval', access_email_sent:'Access email', page_view:'Page view', search:'Search', request_sent:'Request sent', share:'Shared hub', view:'Section viewed'};
+var EVN = {click:'Click', open_report:'Opened a report', form_submit:'Form sent', lookup:'Lookup', sign_in:'Signed in', open_hub:'Opened hub', request_received:'New request', qa_decision:'QA decision', approval_decision:'Approval', access_email_sent:'Access email', page_view:'Page view', search:'Search', request_sent:'Request sent', share:'Shared hub', view:'Section viewed', spoof_check:'Spoofing check', outbound:'Followed a link', report_delivered:'Report delivered', request_status:'Request status', report_removed:'Report removed'};
 function loadAct(src){
   authed({action:'admin_activity', source:src, days:ADM.days, limit:1500}).then(function(r){
     if (ADM.tab !== src) return;
@@ -2225,10 +2335,12 @@ var ICO = (function(){
     page_view:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>', qa_decision:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/>',
     approval_decision:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/>', access_email_sent:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
     share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/>', people:'<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 11a3 3 0 1 0 0-6M22 21c0-3-2-5-5-5.5"/>',
-    pulse:'<path d="M3 12h4l3 8 4-16 3 8h4"/>'};
+    pulse:'<path d="M3 12h4l3 8 4-16 3 8h4"/>', spoof_check:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/><path d="m15 15 2 2 4-4"/>',
+    outbound:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>', report_delivered:'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="m9.5 14 2 2 3.5-4"/>',
+    request_status:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', report_removed:'<path d="M7 3h7l4 4v14H7z"/><path d="M10 13h5"/>'};
   return function(k){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (p[k] || p.click) + '</svg>'; };
 })();
-var KEYEV = /^(open_report|request_sent|form_submit|request_received|lookup|approval_decision|qa_decision|access_email_sent|share)$/;
+var KEYEV = /^(open_report|request_sent|form_submit|request_received|lookup|approval_decision|qa_decision|access_email_sent|share|spoof_check|outbound|report_delivered|request_status)$/;
 function bucketsOf(rows, days, n){
   var now = Date.now(), span = days * 86400000, out = []; for (var i = 0; i < n; i++) out.push(0);
   rows.forEach(function(x){ var t = new Date(x.ts).getTime(); var k = Math.floor((t - (now - span)) / span * n); if (k >= 0 && k < n) out[k]++; });
@@ -2303,6 +2415,9 @@ function personTile(p, src, open){
     h += '<div class="xp"><div>' +
       (site ? '<h6>Hospitals looked up</h6>' + chipList(looks) : (doms.length ? '<h6>Hospital' + (doms.length > 1 ? 's' : '') + '</h6>' + chipList(doms.map(function(d){ return {label:d, n:p.doms[d]}; })) : '')) +
       '<h6 style="margin-top:12px">Reports opened</h6>' + chipList(reps) +
+      (function(){ var sp = countBy(p.rows, function(x){ return x.what.replace(/^Email spoofing check · /, ''); }, function(x){ return x.ev === 'spoof_check'; });
+        var ob = countBy(p.rows, function(x){ return x.what.replace(/^Suggested service: /, '') + (x.detail ? ' → ' + hostOf(x.detail) : ''); }, function(x){ return x.ev === 'outbound'; });
+        return (sp.length ? '<h6 style="margin-top:12px">Spoofing checks run</h6>' + chipList(sp) : '') + '<h6 style="margin-top:12px">Links they followed</h6>' + chipList(ob); })() +
       '<h6 style="margin-top:12px">What they clicked most</h6>' + (clicks.length ? hbars(clicks) : '<p class="fine">No clicks yet.</p>') +
       (reqs.length ? '<h6 style="margin-top:12px">Requests &amp; decisions</h6>' + chipList(countBy(reqs, function(x){ return x.what; })) : '') +
       '<p class="fine" style="margin-top:12px">First seen ' + esc(fmtTs(p.first)) + (site && p.dev ? ' · ' + esc(p.dev) : '') + '</p>' +
@@ -2338,6 +2453,14 @@ function renderAct(src){
     '<div class="pan3"><div class="pan"><h5>Most used CTAs, reports &amp; lookups</h5>' + (top.length ? hbars(top) : '<p class="fine">Nothing yet.</p>') + '</div>' +
       '<div class="pan"><h5>' + (site ? 'Where visitors come from' : 'Most active hospitals') + '</h5>' + (side.length ? hbars(side) : '<p class="fine">Nothing yet.</p>') + '</div>' +
       '<div class="pan"><h5>' + (site ? 'Hospitals looked up' : 'Latest requests &amp; approvals') + '</h5>' + (site ? (lk.length ? hbars(lk) : '<p class="fine">No lookups yet.</p>') : (feed && feed.length ? '<div class="tl" style="max-height:none">' + feed.map(function(x){ return '<div class="it k"><span class="tm">' + esc(ago(x.ts)) + '</span><span class="ib">' + ICO(x.ev) + '</span><span class="tx"><b style="font-weight:600">' + esc(x.what) + '</b><small>' + esc([x.dom, x.who !== '(system)' ? x.who : x.detail].filter(Boolean).join(' · ')) + '</small></span></div>'; }).join('') + '</div>' : '<p class="fine">None yet.</p>')) + '</div></div>' +
+    (function(){
+      var rp = countBy(rows, function(x){ return x.what; }, function(x){ return x.ev === 'open_report'; }).slice(0, 8);
+      var ob = countBy(rows, function(x){ return x.what.replace(/^Suggested service: /, '') + (x.detail ? ' → ' + hostOf(x.detail) : ''); }, function(x){ return x.ev === 'outbound'; }).slice(0, 8);
+      var sp = countBy(rows, function(x){ return x.what.replace(/^Email spoofing check · /, '') + (x.dom ? ' · ' + x.dom : ''); }, function(x){ return x.ev === 'spoof_check' || (site && x.ev === 'form_submit' && /spoof/i.test(x.what)); }).slice(0, 8);
+      return '<div class="pan3"><div class="pan"><h5>Which reports were opened</h5>' + (rp.length ? hbars(rp) : '<p class="fine">No reports opened yet.</p>') + '</div>' +
+        '<div class="pan"><h5>Links followed <small>suggested services and other sites</small></h5>' + (ob.length ? hbars(ob) : '<p class="fine">No outside links followed yet.</p>') + '</div>' +
+        '<div class="pan"><h5>Email spoofing checks</h5>' + (sp.length ? hbars(sp) : '<p class="fine">No checks run yet.</p>') + '</div></div>';
+    })() +
     '<div class="sech"><h4>' + (site ? 'Visitors' : 'People') + '</h4><small>' + P.length + ' · most recent first · click a tile to see everything they did</small></div>';
   var shown = P.slice(0, ADM.pmax || 48);
   h += P.length ? '<div class="pgrid">' + shown.map(function(p){ return personTile(p, src, p.who === ADM.openP); }).join('') + '</div>' +
@@ -2358,6 +2481,236 @@ $('admBody').addEventListener('click', function(e){
   ADM.openP = t.classList.contains('open') ? '' : t.dataset.person; renderAct(ADM.tab);
   var el = document.querySelector('.pt.open'); if (el) el.scrollIntoView({block:'nearest', behavior: reduce ? 'auto' : 'smooth'});
 });
+
+/*ADM4*/
+function hostOf(u){ try { return new URL(u, location.href).hostname.replace(/^www\./, ''); } catch(_){ return String(u).slice(0, 40); } }
+/* POST for uploads and large replies (no URL-length limit); JSONP stays the default for everything else */
+function gasPost(params){
+  if (PREVIEW) return gasPreview(params);
+  if (!GAS_ENDPOINT || GAS_ENDPOINT.indexOf('{{') === 0) return Promise.resolve({ok:false, message:'The hub is not connected to its backend yet.'});
+  return fetch(GAS_ENDPOINT, {method:'POST', body:JSON.stringify(params), redirect:'follow', credentials:'omit'})
+    .then(function(r){ return r.json(); })
+    .catch(function(){ return {ok:false, error:'network', message:'Could not reach the server. Check your connection and try again.'}; });
+}
+function authedPost(params){ params.session = S.session; return gasPost(params).then(function(r){
+  if (r && r.error === 'no_session') { clearSession(); closeModal($('mAdmin')); showScreen('scrSignIn'); msg('mEmail', 'info', 'Your session has ended. Please sign in again.'); throw r; }
+  return r; }); }
+/* wake the backend while the person types their email: the first call after a quiet spell is the slow one */
+if (!PREVIEW && GAS_ENDPOINT && GAS_ENDPOINT.indexOf('{{') !== 0) { try { gasLive({action:'ping'}); } catch(_){} }
+
+/* ═══ full-screen admin console ═══ */
+var _openAdmin = openAdmin;
+openAdmin = function(tab, focus){ _openAdmin(tab, focus); document.body.style.overflow = 'hidden'; $('admWho').textContent = S.email || ''; };
+var _closeModal = closeModal;
+closeModal = function(m, force){ _closeModal(m, force); if (m && m.id === 'mAdmin' && $('toolbar').hidden) document.body.style.overflow = ''; };
+var _admTab = admTab;
+admTab = function(t){
+  if (t !== 'hreq') return _admTab(t);
+  ADM.tab = t; document.querySelectorAll('[data-atab]').forEach(function(b){ b.classList.toggle('on', b.dataset.atab === t); b.setAttribute('aria-selected', b.dataset.atab === t); });
+  $('admBody').innerHTML = '<div class="spin"></div>'; loadHreq();
+};
+var _admCount = admCount;
+admCount = function(){ _admCount(); authed({action:'admin_hospital_requests'}).then(function(r){ if (r && r.ok) { HR.list = r.requests; hrBadge(); } }).catch(function(){}); };
+
+/* ═══ hospital requests: everything hospitals asked for from their hub ═══ */
+var HR = {list:[], filter:'open', kind:'', q:'', open:'', file:null, keep:''};
+var HRK = {service:{l:'Service request', ic:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>'},
+  verify:{l:'Verify fixes', ic:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/>'},
+  review:{l:'Review session', ic:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'}};
+function hrOpen(x){ return x.status === 'Pending' || x.status === 'In Progress'; }
+function hrBadge(){ var n = HR.list.filter(function(x){ return x.status === 'Pending'; }).length; $('admHreqN').hidden = !n; $('admHreqN').textContent = n; }
+function loadHreq(){
+  authed({action:'admin_hospital_requests'}).then(function(r){
+    if (ADM.tab !== 'hreq') return;
+    if (!r.ok) { $('admBody').innerHTML = '<p class="msg err">' + esc(r.message || 'Could not load the requests.') + '</p>'; return; }
+    HR.list = r.requests; hrBadge(); renderHreq();
+  }).catch(function(){});
+}
+function kindIco(k){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (HRK[k] || HRK.service).ic + '</svg>'; }
+function extOf(n, mime){ var m = /\.([a-z0-9]{2,5})$/i.exec(n || ''); return (m ? m[1] : String(mime || '').split('/').pop()).slice(0, 4).toUpperCase(); }
+function renderHreq(){
+  var q = HR.q.toLowerCase(), all = HR.list;
+  var cnt = {open:0, Pending:0, 'In Progress':0, Completed:0, Cancelled:0, all:all.length};
+  var dl = 0; all.forEach(function(x){ cnt[x.status] = (cnt[x.status] || 0) + 1; if (hrOpen(x)) cnt.open++; dl += (x.delivered || []).length; });
+  var list = all.filter(function(x){
+    if (x.id === HR.keep) return true;   /* the card you just worked on stays in view */
+    if (HR.filter === 'open' && !hrOpen(x)) return false;
+    if (HR.filter !== 'open' && HR.filter !== 'all' && x.status !== HR.filter) return false;
+    if (HR.kind && x.kind !== HR.kind) return false;
+    if (q && [x.name, x.domain, x.email, x.title, x.details, x.topic, x.state].join(' ').toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+  var kp = function(ic, v, l){ return '<div class="kp"><span class="ic">' + ICO(ic) + '</span><b>' + num(v) + '</b><span>' + l + '</span></div>'; };
+  var chip = function(k, label){ return '<button type="button" data-hf="' + esc(k) + '" class="' + (HR.filter === k ? 'on' : '') + '">' + label + ' <b>' + (cnt[k] || 0) + '</b></button>'; };
+  var h = (PREVIEW ? '<p class="fine" style="margin-bottom:8px">Example requests (preview). Status changes and deliveries here are simulated.</p>' : '') +
+    '<div class="kp4">' + kp('request_received', cnt.Pending, 'new, not started') + kp('request_status', cnt['In Progress'], 'in progress') + kp('qa_decision', cnt.Completed, 'completed') + kp('report_delivered', dl, 'reports delivered') + '</div>' +
+    '<div class="sfil">' + chip('open', 'Open') + chip('Pending', 'New') + chip('In Progress', 'In progress') + chip('Completed', 'Completed') + chip('Cancelled', 'Cancelled') + chip('all', 'All') + '</div>' +
+    '<div class="adm-bar"><input type="search" id="hrQ" placeholder="Search hospital, requester or request" value="' + esc(HR.q) + '">' +
+    '<select id="hrK"><option value="">All request types</option><option value="service">Action items (services)</option><option value="verify">Verify fixes</option><option value="review">Review sessions</option></select>' +
+    '<button class="btn ghost sm" type="button" id="hrRf">Refresh</button></div>' +
+    '<p class="fine" style="margin:-4px 0 12px">Everything a hospital asked for from its hub: the <b>Action items to mitigate cyber risk</b>, <b>verify fixes</b> and <b>review sessions</b>. The status you set shows in that hospital’s <b>Requested Reports</b>. When the work is done, deliver the report here and it appears in their hub.</p>';
+  h += list.length ? '<div class="hrgrid">' + list.map(hrCard).join('') + '</div>' : '<div class="pan" style="text-align:center;padding:30px"><b>' + (HR.filter === 'open' ? 'Nothing open right now.' : 'No requests here.') + '</b><p class="fine">New requests from hospitals appear here as they come in, newest first.</p></div>';
+  $('admBody').innerHTML = h; $('hrK').value = HR.kind;
+  $('hrQ').addEventListener('input', function(){ HR.q = this.value; var p = this.selectionStart; renderHreq(); $('hrQ').focus(); try { $('hrQ').setSelectionRange(p, p); } catch(_){} });
+  $('hrK').addEventListener('change', function(){ HR.kind = this.value; renderHreq(); });
+  $('hrRf').addEventListener('click', loadHreq);
+  if (HR.open) { var f = document.querySelector('.hr[data-hid="' + HR.open + '"] .drop'); if (f) wireDrop(f); }
+}
+function hrCard(x){
+  var k = HRK[x.kind] || HRK.service, open = HR.open === x.id, sts = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
+  var det = '';
+  if (x.kind === 'review') det = '<div><span>When</span>' + esc([x.date || 'Flexible date', x.time].filter(Boolean).join(' · ')) + '</div>' + (x.topic ? '<div><span>Topic</span>' + esc(x.topic) + '</div>' : '');
+  else if (x.kind === 'verify') det = (x.cves !== '' && x.cves != null ? '<div><span>CVEs at request</span>' + esc(x.cves) + '</div>' : '') + (x.details ? '<div><span>Their note</span>' + esc(x.details) + '</div>' : '');
+  else if (x.details) det = '<div><span>Details</span>' + esc(x.details) + '</div>';
+  var files = (x.delivered || []).map(function(d){
+    return '<div class="dfile"><span class="ty">' + esc(extOf(d.name, d.mime)) + '</span><div><b>' + esc(d.title) + '</b><small>' + esc(d.name) + (d.kb ? ' · ' + esc(d.kb) + ' KB' : '') + ' · ' + esc(ago(d.ts)) + (d.by ? ' · ' + esc(String(d.by).split('@')[0]) : '') + '</small></div><button class="lnk" type="button" data-hrm="' + esc(d.id) + '">Remove</button></div>';
+  }).join('');
+  var form = open ? '<div class="dform"><label class="drop" tabindex="0"><input type="file" hidden accept=".pdf,.html,.htm,.docx,.xlsx,.csv,.png,.jpg,.jpeg" data-hfile><b>' + (HR.file ? esc(HR.file.name) : 'Drop the report here, or click to choose') + '</b><small>' + (HR.file ? Math.round(HR.file.size / 1024) + ' KB · ready to send' : 'PDF (best), HTML, Word, Excel, CSV or image · up to 25 MB') + '</small></label>' +
+    '<input type="text" data-htitle placeholder="Report title the hospital will see" value="' + esc(HR.title || (x.title + ' · ' + new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'}))) + '">' +
+    '<textarea rows="2" data-hnote placeholder="Short note shown with the report (optional)">' + esc(HR.note || '') + '</textarea>' +
+    '<label class="chk2"><input type="checkbox" data-hmail checked> Email ' + esc(x.email) + ' that the report is ready</label>' +
+    '<label class="chk2"><input type="checkbox" data-hdone checked> Mark this request completed</label>' +
+    '<div class="hr-acts"><button class="btn sm" type="button" data-hsend="' + esc(x.id) + '">Deliver to the hub</button><button class="btn ghost sm" type="button" data-hcancel>Cancel</button></div><div class="prog" hidden><i></i></div></div>' : '';
+  return '<div class="hr k-' + esc(x.kind) + (open ? ' hl' : '') + '" data-hid="' + esc(x.id) + '">' +
+    '<div class="hr-top"><span class="hr-ic">' + kindIco(x.kind) + '</span><div><b>' + esc(x.title) + '</b><small>' + esc(k.l) + ' · ' + esc(ago(x.ts)) + '</small></div><span class="st ' + esc(String(x.status).split(' ')[0]) + '">' + esc(x.status === 'Pending' ? 'New' : x.status) + '</span></div>' +
+    '<div class="hr-hosp">' + (x.band ? '<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:' + (BANDCOL[x.band] || 'var(--min)') + '"></span>' : '') + '<b>' + esc(x.name) + '</b><span>' + esc(x.domain) + (x.state ? ' · ' + esc(x.state) : '') + '</span></div>' +
+    '<div class="who2"><span class="av2" style="background:' + hueOf(x.email) + '">' + esc(initials(x.email)) + '</span><div><b>' + esc(x.email) + '</b><small>asked ' + esc(fmtTs(x.ts)) + (x.updated_by ? ' · last update by ' + esc(String(x.updated_by).split('@')[0]) + ' ' + esc(ago(x.updated_at)) : '') + '</small></div></div>' +
+    (det ? '<div class="hr-det">' + det + '</div>' : '') + (files ? '<div class="dfiles">' + files + '</div>' : '') + form +
+    '<div class="hr-acts"><div class="seg" role="group" aria-label="Status">' + sts.map(function(v){ return '<button type="button" data-hst="' + esc(x.id) + '" data-v="' + v + '" class="' + (x.status === v ? 'on' : '') + '">' + (v === 'In Progress' ? 'In progress' : v === 'Pending' ? 'New' : v) + '</button>'; }).join('') + '</div><span class="sp"></span>' +
+    (open ? '' : '<button class="btn sm" type="button" data-hdeliver="' + esc(x.id) + '">Deliver report</button>') +
+    '<button class="btn ghost sm" type="button" data-openhub="' + esc(x.domain) + '">Open hub →</button></div></div>';
+}
+function wireDrop(el){
+  var inp = el.querySelector('input[type=file]');
+  ['dragenter', 'dragover'].forEach(function(ev){ el.addEventListener(ev, function(e){ e.preventDefault(); el.classList.add('on'); }); });
+  ['dragleave', 'drop'].forEach(function(ev){ el.addEventListener(ev, function(e){ e.preventDefault(); el.classList.remove('on'); }); });
+  el.addEventListener('drop', function(e){ var f = e.dataTransfer && e.dataTransfer.files[0]; if (f) pickFile(f); });
+  inp.addEventListener('change', function(){ if (inp.files[0]) pickFile(inp.files[0]); });
+  el.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inp.click(); } });
+}
+var MIMES = {pdf:'application/pdf', html:'text/html', htm:'text/html', png:'image/png', jpg:'image/jpeg', jpeg:'image/jpeg', csv:'text/csv',
+  docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document', xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'};
+function pickFile(f){
+  var ext = (/\.([a-z0-9]+)$/i.exec(f.name) || [])[1], mime = MIMES[String(ext || '').toLowerCase()];
+  if (!mime) return toast('Choose a PDF, HTML, Word, Excel, CSV or image file.');
+  if (f.size > 25 * 1024 * 1024) return toast('That file is over 25 MB.');
+  keepForm(); HR.file = {name:f.name, size:f.size, mime:mime, f:f}; renderHreq();
+}
+function keepForm(){ var t = document.querySelector('[data-htitle]'), n = document.querySelector('[data-hnote]'); if (t) HR.title = t.value; if (n) HR.note = n.value; }
+function readB64(f){ return new Promise(function(res, rej){ var r = new FileReader(); r.onload = function(){ res(String(r.result).split(',')[1] || ''); }; r.onerror = rej; r.readAsDataURL(f); }); }
+document.getElementById('admBody').addEventListener('click', function(e){
+  var c = e.target.closest('[data-hf]'); if (c) { HR.filter = c.dataset.hf; HR.keep = ''; return renderHreq(); }
+  var st = e.target.closest('[data-hst]');
+  if (st) {
+    var id = st.dataset.hst, v = st.dataset.v, x = HR.list.filter(function(r){ return r.id === id; })[0]; if (!x || x.status === v) return;
+    st.parentNode.querySelectorAll('button').forEach(function(b){ b.disabled = true; });
+    return authed({action:'admin_request_status', id:id, status:v}).then(function(r){
+      if (!r.ok) { toast(r.message || 'Could not save the status.'); return loadHreq(); }
+      HR.keep = id; x.status = v; x.updated_by = S.email; x.updated_at = new Date().toISOString(); hrBadge(); renderHreq();
+      toast('Status set to ' + v + '. The hospital sees it in its hub.');
+    }).catch(function(){});
+  }
+  var dv = e.target.closest('[data-hdeliver]'); if (dv) { HR.open = dv.dataset.hdeliver; HR.file = null; HR.title = ''; HR.note = ''; renderHreq(); return; }
+  if (e.target.closest('[data-hcancel]')) { HR.open = ''; HR.file = null; return renderHreq(); }
+  var rm = e.target.closest('[data-hrm]');
+  if (rm) {
+    if (!confirmInline(rm, 'Remove from hub?')) return;
+    return authed({action:'admin_deliver_remove', id:rm.dataset.hrm}).then(function(r){ if (!r.ok) return toast(r.message || 'Could not remove it.'); toast('Removed from the hospital’s hub.'); loadHreq(); }).catch(function(){});
+  }
+  var sd = e.target.closest('[data-hsend]');
+  if (sd) {
+    keepForm();
+    var card = sd.closest('.hr'), x2 = HR.list.filter(function(r){ return r.id === sd.dataset.hsend; })[0];
+    if (!HR.file) return toast('Choose the report file first.');
+    if (!String(HR.title || '').trim()) return toast('Give the report a title.');
+    var mail = card.querySelector('[data-hmail]').checked, done = card.querySelector('[data-hdone]').checked;
+    card.querySelectorAll('.dform button').forEach(function(b){ b.disabled = true; }); card.querySelector('.prog').hidden = false; sd.textContent = 'Uploading…';
+    readB64(HR.file.f).then(function(b64){
+      return authedPost({action:'admin_deliver', request_id:x2.id, file_b64:b64, file_name:HR.file.name, file_type:HR.file.mime, title:HR.title.trim(), note:String(HR.note || '').trim(), notify: mail ? 'yes' : 'no', mark_done: done ? 'yes' : 'no'});
+    }).then(function(r){
+      if (!r.ok) { toast(r.message || 'Could not deliver the report.'); card.querySelectorAll('.dform button').forEach(function(b){ b.disabled = false; }); card.querySelector('.prog').hidden = true; sd.textContent = 'Deliver to the hub'; return; }
+      HR.keep = x2.id; HR.open = ''; HR.file = null; toast('Delivered. It is in ' + (x2.name || x2.domain) + '’s Requested Reports' + (r.emailed && r.emailed.length ? ', and ' + r.emailed[0] + ' has been emailed.' : '.'));
+      loadHreq();
+    }).catch(function(){ toast('Could not read that file.'); });
+  }
+});
+
+/* ═══ 05 · requested reports: delivered files on top, request status below ═══ */
+function loadDelivered(){
+  var d = S.domain;
+  authed({action:'get_delivered', hospital_domain:d}).then(function(r){ if (r && r.ok && S.domain === d) { S.delivered = r.reports || []; renderRequested(); } }).catch(function(){});
+}
+var DOCART = '<svg width="64" height="76" viewBox="0 0 64 76" aria-hidden="true"><rect x="6" y="4" width="46" height="62" rx="4" fill="currentColor" fill-opacity=".12" stroke="currentColor" stroke-width="1.8"/><path d="M36 4v16h16" fill="none" stroke="currentColor" stroke-width="1.8"/><line class="anim-line" x1="14" y1="34" x2="44" y2="34" stroke="currentColor" stroke-width="2"/><line class="anim-line" style="animation-delay:.5s" x1="14" y1="42" x2="44" y2="42" stroke="currentColor" stroke-width="2"/><line class="anim-line" style="animation-delay:1s" x1="14" y1="50" x2="32" y2="50" stroke="currentColor" stroke-width="2"/><circle cx="50" cy="60" r="11" fill="var(--surface)" stroke="currentColor" stroke-width="2"/><path d="m45 60 3.5 3.5L55 57" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+renderRequested = function(){
+  var rows = AC_ITEMS.filter(function(a){ return S.state['btn_' + a.req]; }).map(function(a){ return {key:a.req, req:a.req, title:a.title}; });
+  if (S.state.btn_verify_fixes) rows.unshift({key:'verify_fixes', req:'Updated report (verify fixes)', title:'Re-assessment of your hospital after fixes'});
+  if (S.state.btn_review) rows.push({key:'review', req:'Review session', title:'A walkthrough of your reports with the SureShield team'});
+  var dl = S.delivered || [];
+  $('reqMeta').textContent = (dl.length ? dl.length + ' report' + (dl.length === 1 ? '' : 's') + ' delivered · ' : '') + (rows.length ? rows.length + ' request' + (rows.length === 1 ? '' : 's') : 'No requests yet');
+  var h = '';
+  if (dl.length) h += '<p class="rqh">Delivered to you</p><div class="dgrid">' + dl.map(function(d){
+    return '<div class="dtile" data-dl="' + esc(d.id) + '"><span class="art">' + DOCART + '</span><span class="cap"><span class="lbl">' + esc(extOf(d.name, d.mime)) + ' · delivered ' + esc(new Date(d.ts).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'})) + '</span><b>' + esc(d.title) + '</b>' +
+      '<p>' + esc(d.note || (d.request && d.request !== 'Report' ? 'Prepared for your request: ' + d.request : 'Prepared for your hospital by the SureShield team')) + '</p>' +
+      '<span class="row"><button class="btn sm" type="button" data-dlopen="' + esc(d.id) + '">Open report →</button><button class="btn ghost sm" type="button" data-dlget="' + esc(d.id) + '">Download</button></span></span></div>';
+  }).join('') + '</div>';
+  if (rows.length) h += (dl.length ? '<p class="rqh">Your requests</p>' : '') + rows.map(function(a){
+    var st = S.state['status_' + a.key] || 'Pending', has = dl.some(function(d){ return d.request === a.req; });
+    return '<div class="req"><div><b>' + esc(a.req) + '</b><p>' + esc(a.title) + (has ? ' · report delivered above' : '') + '</p></div><span class="st ' + esc(st.split(' ')[0]) + '">' + esc(st) + '</span></div>';
+  }).join('');
+  $('requested').innerHTML = h || '<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5"/></svg><p>Reports and services you request from <b>Action Items to Mitigate Cyber Risk</b> will appear here with their status, and the finished reports will be delivered here.</p></div>';
+};
+function b64Blob(b64, mime){ var bin = atob(b64), n = bin.length, u = new Uint8Array(n); for (var i = 0; i < n; i++) u[i] = bin.charCodeAt(i); return new Blob([u], {type:mime}); }
+var DL_URL = '';
+function fetchDelivered(id){
+  return authed({action:'get_delivered_file', hospital_domain:S.domain, id:id}).then(function(r){
+    if (!r.ok) { toast(r.message || 'That report could not be opened.'); throw r; }
+    return r;
+  });
+}
+function saveBlob(blob, name){ var u = URL.createObjectURL(blob), a = document.createElement('a'); a.href = u; a.download = name || 'report'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(u); }, 60000); }
+$('requested').addEventListener('click', function(e){
+  var o = e.target.closest('[data-dlopen]'), g = e.target.closest('[data-dlget]');
+  if (!o && !g) return;
+  var b = o || g, t0 = b.textContent; b.disabled = true; b.textContent = 'Opening…';
+  fetchDelivered((o || g).dataset[o ? 'dlopen' : 'dlget']).then(function(r){
+    b.disabled = false; b.textContent = t0;
+    var blob = b64Blob(r.b64, r.mime);
+    if (g || !/pdf|html|image/.test(r.mime)) return saveBlob(blob, r.name);
+    var f = $('repFrame'); if (DL_URL) URL.revokeObjectURL(DL_URL); DL_URL = URL.createObjectURL(blob);
+    f.removeAttribute('srcdoc');
+    if (/html/.test(r.mime)) { f.setAttribute('sandbox', 'allow-scripts allow-popups allow-modals allow-downloads allow-popups-to-escape-sandbox'); blob.text().then(function(t){ f.srcdoc = t; }); }
+    else if (/image/.test(r.mime)) f.srcdoc = '<body style="margin:0;background:#E6EBEF;display:grid;place-items:center;min-height:100vh"><img src="' + DL_URL + '" style="max-width:96%;box-shadow:0 18px 50px rgba(22,48,60,.22)"></body>';
+    else f.src = DL_URL;
+    f.hidden = false; $('toolbar').hidden = false; $('toolTitle').textContent = 'Delivered report'; $('toolName').textContent = r.title || '';
+    var dlb = $('toolDl'); dlb.hidden = false; dlb.href = DL_URL; dlb.download = r.name || 'report'; document.body.style.overflow = 'hidden';
+    setTimeout(function(){ $('toolClose').focus(); }, 30);
+  }).catch(function(){ b.disabled = false; b.textContent = t0; });
+});
+$('toolClose').addEventListener('click', function(){ var f = $('repFrame'); f.removeAttribute('sandbox'); f.removeAttribute('src'); $('toolDl').hidden = true; });
+
+/* ═══ 06 · remediation fixes as a card grid ═══ */
+var FX = {plan:[], cols:[], f:'all'};
+function renderFixes(){
+  var plan = FX.plan || [], all = [];
+  plan.forEach(function(ph, k){ ph.items.forEach(function(it, j){ all.push({it:it, k:k, ph:ph.phase, n:j + 1}); }); });
+  var quick = all.filter(function(x){ return x.it.effort === 'low'; }).length;
+  var chip = function(id, label, n, col){ return '<button type="button" data-fx="' + id + '" data-track="Fixes filter: ' + esc(label) + '" class="' + (String(FX.f) === String(id) ? 'on' : '') + '">' + (col ? '<i style="background:' + col + '"></i>' : '') + esc(label) + ' <b>' + n + '</b></button>'; };
+  var bar = '<div class="fxbar" role="group" aria-label="Filter fixes">' + chip('all', 'All fixes', all.length) + plan.map(function(ph, k){ return chip(k, ph.phase, ph.items.length, FX.cols[k]); }).join('') + chip('quick', 'Quick wins', quick, 'var(--low)') + '</div>';
+  var list = all.filter(function(x){ return FX.f === 'all' || (FX.f === 'quick' ? x.it.effort === 'low' : x.k === +FX.f); });
+  var cls = function(p, v){ return v === 'low' ? p + '-low' : v === 'high' ? p + '-high' : ''; };
+  $('plan').innerHTML = plan.length ? bar + '<div class="fxgrid">' + list.map(function(x){
+    var it = x.it;
+    return '<article class="fx" style="--pc:' + FX.cols[x.k] + '" tabindex="0" title="Click to read the full fix" data-track="Fix: ' + esc(it.t) + '"><div class="fx-h"><span class="fx-ph">' + esc(x.ph) + '</span><span class="fx-n">' + String(x.n).padStart(2, '0') + '</span></div>' +
+      '<b>' + esc(it.t) + '</b><p>' + esc(it.d) + '</p><div class="fx-m">' + (it.effort === 'low' ? '<span class="qw">Quick win</span>' : '') +
+      (it.effort ? '<span class="' + cls('e', it.effort === 'high' ? 'high' : it.effort) + '">' + esc(it.effort) + ' effort</span>' : '') + (it.impact ? '<span class="' + (it.impact === 'high' ? 'i-high' : '') + '">' + esc(it.impact) + ' impact</span>' : '') + '</div></article>';
+  }).join('') + '</div>' : '<p class="fine">No fixes are listed for this hospital.</p>';
+}
+$('plan').addEventListener('click', function(e){
+  var c = e.target.closest('[data-fx]'); if (c) { FX.f = c.dataset.fx === 'all' || c.dataset.fx === 'quick' ? c.dataset.fx : +c.dataset.fx; renderFixes(); return; }
+  var f = e.target.closest('.fx'); if (f) f.classList.toggle('full');
+});
+$('plan').addEventListener('keydown', function(e){ var f = e.target.closest && e.target.closest('.fx'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); f.classList.toggle('full'); } });
+
 $('admBody').addEventListener('keydown', function(e){ var t = e.target.closest && e.target.closest('.pt'); if (t && (e.key === 'Enter' || e.key === ' ') && e.target === t) { e.preventDefault(); t.click(); } });
 (function(){
   var tip = document.createElement('div'); tip.className = 'ctip'; tip.hidden = true; document.body.appendChild(tip);
