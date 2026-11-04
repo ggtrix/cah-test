@@ -428,7 +428,7 @@ footer b{color:rgba(255,255,255,.82);font-weight:600}
   --bar:#08131A; --bar-2:#102029; --bar-rgb:8,19,26;
   --topbar:rgba(13,23,29,.92); --focus:#5CC3CD;
   --map-stroke:#0D171D; --map-sel:#E8EFF3; --lead:#4F6573; --hatch-a:#1B2C35; --hatch-b:#4F6573;
-  --onband:#0B1419; --plate:#fff; color-scheme:dark;}
+  --onband:#0B1419; --plate:transparent; color-scheme:dark;}
 body{background:var(--ground);transition:background-color .25s,color .25s}
 
 /* theme switch */
@@ -447,7 +447,8 @@ body{background:var(--ground);transition:background-color .25s,color .25s}
 .ovr::after{background:linear-gradient(180deg,rgba(var(--bar-rgb),.55) 0%,rgba(var(--bar-rgb),.88) 40%,rgba(var(--bar-rgb),.88) 62%,rgba(var(--bar-rgb),.5) 100%)}
 .hero::after{background:radial-gradient(ellipse 56% 74% at 50% 46%,rgba(var(--bar-rgb),.95) 0%,rgba(var(--bar-rgb),.86) 44%,rgba(var(--bar-rgb),.42) 76%,rgba(var(--bar-rgb),.1) 100%)}
 .cta::after{background:radial-gradient(ellipse 56% 80% at 50% 50%,rgba(var(--bar-rgb),.95) 0%,rgba(var(--bar-rgb),.84) 46%,rgba(var(--bar-rgb),.35) 80%,rgba(var(--bar-rgb),.1) 100%)}
-/* the marks are dark artwork; on a dark bar they sit on a white plate, never recolored */
+/* dark mode: the logos turn white instead of sitting on a white plate */
+:root[data-theme="dark"] .brands img,:root[data-theme="dark"] .org img{filter:brightness(0) invert(1)}
 .brands a{background:var(--plate);border-radius:8px;padding:3px 7px}
 .org img{background:var(--plate);border-radius:8px;padding:5px 9px;box-sizing:content-box}
 .caveat{border:1px solid var(--line-2)}
@@ -1243,6 +1244,7 @@ var CAH_REPORTS = {
   var _n = 0;
   /* cookie-free first (see the hub: with two Google accounts signed in, a script tag gets an account chooser); JSONP as fallback */
   function gas(params){
+    try { if (params && params.action !== 'track' && !params.vid) params.vid = localStorage.getItem('cahVid') || ''; } catch(_){}
     if (!GAS_ENDPOINT || GAS_ENDPOINT.indexOf('{{') === 0 || !window.fetch) return gasJsonp(params);
     var qs = Object.keys(params).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k] == null ? '' : params[k]); }).join('&');
     var url = GAS_ENDPOINT + (GAS_ENDPOINT.indexOf('?') > -1 ? '&' : '?') + qs, ctl = window.AbortController ? new AbortController() : null;
@@ -1787,8 +1789,9 @@ function countUp(el){
       '</li>';
     }
     return '<div class="card">' +
-      '<div class="rh"><span class="bb" style="background:' + (BANDCOL[r[4]] || 'var(--min)') + '">' +
-        esc(r[4]) + '</span><span class="rank">' + rank(r) + '</span></div>' +
+      /* no band or ranking on the public site: just whether there is something to act on */
+      '<div class="rh"><span class="bb" style="background:' + (total ? 'var(--accent)' : 'var(--low)') + '">' +
+        (total ? 'Action needed' : 'No action flagged') + '</span><span class="rank">' + 'Details in the hospital\u2019s own report' + '</span></div>' +
       '<h3>' + esc(r[1]) + '</h3>' +
       '<div class="who">' + esc(r[0]) + (r[2] ? ' &middot; ' + esc(r[2]) : '') + '</div>' +
       (total
@@ -2310,7 +2313,7 @@ window.EX = (function(){
     new MutationObserver(function(){
       var c = box.querySelector('.card'), q = (document.getElementById(id === 'rTop' ? 'qTop' : 'qBot') || {}).value || '';
       if (c) { var h = c.querySelector('h3'), w = c.querySelector('.who'), b = c.querySelector('.bb');
-        push('lookup', h ? h.textContent : q, (b ? b.textContent + ' risk' : '') + (q ? ' · searched "' + clip(q, 60) + '"' : ''), id === 'rTop' ? 'hero search' : 'bottom search', w ? w.textContent.split('·')[0] : ''); }
+        push('lookup', h ? h.textContent : q, (b ? b.textContent : '') + (q ? ' · searched "' + clip(q, 60) + '"' : ''), id === 'rTop' ? 'hero search' : 'bottom search', w ? w.textContent.split('·')[0] : ''); }
       else if (clip(box.textContent)) push('lookup', 'No match', 'searched "' + clip(q, 60) + '"', id === 'rTop' ? 'hero search' : 'bottom search', '');
     }).observe(box, {childList: true});
   });
