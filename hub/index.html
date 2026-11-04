@@ -1346,9 +1346,12 @@ function openHospital(d, resumed){
     }
     S.domain = r.domain; S.data = r.data; S.state = r.state || {}; S.viewer = r.viewer || {}; S.blob = null; saveSession();
     renderShell(); loadTool();
-    var toured = false; try { toured = localStorage.getItem('cahHubToured') === '1'; } catch(e){}
+    /* the welcome intro plays on every visit; the guided tour starts by itself on the first two visits only (the Tour button is always there) */
+    var visits = 0, vk = 'cahHubVisits:' + (S.email || '') + ':' + S.domain;
+    try { visits = +localStorage.getItem(vk) || 0; if (!resumed) { visits++; localStorage.setItem(vk, String(visits)); } } catch(e){}
+    TOUR_AUTO = PREVIEW ? FIRST_OPEN : (visits <= 2 && !resumed);
     var accepted = PREVIEW; try { accepted = accepted || sessionStorage.getItem('cahHubTerms') === '1'; } catch(e){}
-    var intro = (PREVIEW ? FIRST_OPEN : (!toured && !resumed));
+    var intro = (PREVIEW ? FIRST_OPEN : !resumed);
     FIRST_OPEN = false;
     var go = function(){ intro ? playWelcome() : buildIn(false); };
     if (!accepted) { openModal('mTerms'); $('btnTerms').onclick = function(){ try { sessionStorage.setItem('cahHubTerms', '1'); } catch(e){} closeModal($('mTerms'), true); go(); }; }
@@ -1784,10 +1787,10 @@ function buildIn(withTour){
   if (withTour) whenBlob(function(){ setTimeout(function(){ TOUR.start(); }, 120 + els.length * 150 + 500); });
 }
 var W_ITEMS = ['Risk score & national rank', 'Five security pillars', 'Recommended actions', 'Your reports & live email check', 'State, national & GRC breakdowns', 'Sector aggregate reports', 'Remediation fixes', 'Suggested services', 'Your SureShield team'];
-var W_TIMERS = [];
+var W_TIMERS = [], TOUR_AUTO = false;
 function playWelcome(){
   var co = (S.data.rec.profile || {}).company_name || S.domain, w = $('welcome');
-  if (reduce) { buildIn(true); return; }
+  if (reduce) { buildIn(TOUR_AUTO); return; }
   W_TIMERS.forEach(clearTimeout); W_TIMERS = [];
   ['w1','w2','w3'].forEach(function(id){ $(id).classList.remove('on'); }); $('w4').classList.remove('on');
   $('wName').textContent = ''; $('wList').innerHTML = W_ITEMS.map(function(t){ return '<li><i>✓</i>' + esc(t) + '</li>'; }).join('');
@@ -1810,7 +1813,7 @@ function finishWelcome(){
   W_TIMERS.forEach(clearTimeout); W_TIMERS = [];
   var w = $('welcome'); w.classList.add('lift');
   setTimeout(function(){ w.hidden = true; }, 950);
-  buildIn(true);
+  buildIn(TOUR_AUTO);
 }
 $('wSkip').addEventListener('click', finishWelcome);
 
